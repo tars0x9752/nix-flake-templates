@@ -1,0 +1,26 @@
+{
+  "nodes": {
+    "official-templates": {
+      "locked": {
+        "lastModified": 1649246137,
+        "narHash": "sha256-cbAjf3JPoHlJD5Ayoj1sd1Gz1EZMHrFnZWIxbSGslmU=",
+        "owner": "NixOS",
+        "repo": "templates",
+        "rev": "2f86534428917d96d414964c69a5cfe353500ad5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "templates",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "official-templates": "official-templates"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
