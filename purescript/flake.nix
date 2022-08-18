@@ -4,9 +4,13 @@
   inputs =
     {
       nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-      ps-tools.follows = "purs-nix/ps-tools";
-      purs-nix.url = "github:purs-nix/purs-nix/ps-0.15";
+
       flake-utils.url = "github:numtide/flake-utils";
+
+      ps-tools.follows = "purs-nix/ps-tools";
+
+      # https://github.com/purs-nix/purs-nix
+      purs-nix.url = "github:purs-nix/purs-nix/ps-0.15";
     };
 
   outputs = { nixpkgs, flake-utils, ... }@inputs:
