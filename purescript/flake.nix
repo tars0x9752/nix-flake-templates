@@ -113,6 +113,14 @@
                   nix build
                 '';
               }
+              {
+                name = "dev:run-result";
+                category = "Dev";
+                help = "Run build result";
+                command = ''
+                  node result
+                '';
+              }
             ];
           };
         }
