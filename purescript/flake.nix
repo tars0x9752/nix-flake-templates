@@ -26,13 +26,27 @@
               {
                 dependencies =
                   with purs-nix.ps-pkgs;
+                  # Add what you need and comment out what you don't need
+                  # https://pursuit.purescript.org/
                   [
                     prelude
+                    numbers
+                    integers
+                    strings
+                    lists
+                    arrays
                     console
                     effect
-                    lists
-                    numbers
-                    math
+                    aff
+                    maybe
+                    tuples
+                    either
+                    ordered-collections
+                    transformers
+                    validation
+                    parsing
+                    formatters
+                    argonaut
                   ];
 
                 dir = ./.;
