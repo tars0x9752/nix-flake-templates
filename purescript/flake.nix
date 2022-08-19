@@ -16,7 +16,7 @@
     };
 
   outputs = { nixpkgs, flake-utils, devshell, ... }@inputs:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]
+    flake-utils.lib.eachSystem [ "x86_64-linux" ]
       (system:
         let
           pkgs = import nixpkgs {
@@ -103,6 +103,14 @@
                 help = "Run project";
                 command = ''
                   purs-nix run
+                '';
+              }
+              {
+                name = "dev:build";
+                category = "Dev";
+                help = "Run project";
+                command = ''
+                  nix build
                 '';
               }
             ];
