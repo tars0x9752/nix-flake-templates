@@ -7,17 +7,23 @@
 
       flake-utils.url = "github:numtide/flake-utils";
 
+      devshell.url = "github:numtide/devshell";
+
       ps-tools.follows = "purs-nix/ps-tools";
 
       # https://github.com/purs-nix/purs-nix
       purs-nix.url = "github:purs-nix/purs-nix/ps-0.15";
     };
 
-  outputs = { nixpkgs, flake-utils, ... }@inputs:
+  outputs = { nixpkgs, flake-utils, devshell, ... }@inputs:
     flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]
       (system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs {
+            inherit system;
+
+            overlays = [ devshell.overlay ];
+          };
           ps-tools = inputs.ps-tools.legacyPackages.${system};
           purs-nix = inputs.purs-nix { inherit system; };
 
@@ -55,29 +61,52 @@
         {
           packages.default = ps.modules.Main.bundle { };
 
-          devShells.default =
-            pkgs.mkShell
+          devShells.default = pkgs.devshell.mkShell {
+            devshell = {
+              packages =
+                with pkgs;
+                [
+                  entr
+                  nodejs
+                  (ps.command { })
+                  ps-tools.for-0_15.purescript-language-server
+                  purs-nix.esbuild
+                  purs-nix.purescript
+
+                  # formatter
+                  # use purs-tidy instead of purty. see: https://github.com/nwolverson/vscode-ide-purescript/pull/204
+                  nodePackages.purs-tidy
+                ];
+
+              startup.shell-hook.text = ''
+                alias watch="find src | entr -s 'echo bundling; purs-nix bundle'"
+              '';
+
+              motd = ''
+                {bold}{14}🔨 PureScript DevShell 🔨{reset}
+                $(type -p menu &>/dev/null && menu)
+              '';
+            };
+
+            commands = [
               {
-                packages =
-                  with pkgs;
-                  [
-                    entr
-                    nodejs
-                    (ps.command { })
-                    ps-tools.for-0_15.purescript-language-server
-                    purs-nix.esbuild
-                    purs-nix.purescript
-
-                    # formatter
-                    # use purs-tidy instead of purty. see: https://github.com/nwolverson/vscode-ide-purescript/pull/204
-                    nodePackages.purs-tidy
-                  ];
-
-                shellHook =
-                  ''
-                    alias watch="find src | entr -s 'echo bundling; purs-nix bundle'"
-                  '';
-              };
+                name = "dev:init";
+                category = "Dev";
+                help = "Init project";
+                command = ''
+                  direnv allow
+                '';
+              }
+              {
+                name = "dev:run";
+                category = "Dev";
+                help = "Run project";
+                command = ''
+                  purs-nix run
+                '';
+              }
+            ];
+          };
         }
       );
 }
