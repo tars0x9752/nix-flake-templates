@@ -10,3 +10,4 @@
 /.spago
 .direnv
 result
+dist

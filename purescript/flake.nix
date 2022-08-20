@@ -27,6 +27,7 @@
           ps-tools = inputs.ps-tools.legacyPackages.${system};
           purs-nix = inputs.purs-nix { inherit system; };
 
+          # https://github.com/purs-nix/purs-nix/blob/master/docs/purs-nix.md#purs
           ps =
             purs-nix.purs
               {
@@ -57,6 +58,14 @@
 
                 dir = ./.;
               };
+
+          # https://github.com/purs-nix/purs-nix/blob/master/docs/purs-nix.md#command
+          pure-nix-cmd = ps.command {
+            bundle.esbuild =
+              {
+                outfile = "dist/main.js";
+              };
+          };
         in
         {
           packages.default = ps.modules.Main.bundle { };
@@ -68,7 +77,7 @@
                 [
                   entr
                   nodejs
-                  (ps.command { })
+                  pure-nix-cmd
                   ps-tools.for-0_15.purescript-language-server
                   purs-nix.esbuild
                   purs-nix.purescript
@@ -77,10 +86,6 @@
                   # use purs-tidy instead of purty. see: https://github.com/nwolverson/vscode-ide-purescript/pull/204
                   nodePackages.purs-tidy
                 ];
-
-              startup.shell-hook.text = ''
-                alias watch="find src | entr -s 'echo bundling; purs-nix bundle'"
-              '';
 
               motd = ''
                 {bold}{14}🔨 PureScript DevShell 🔨{reset}
@@ -94,7 +99,19 @@
                 category = "Dev";
                 help = "Init project";
                 command = ''
-                  direnv allow
+                  if [ -x "$(command -v direnv)" ]; then
+                    direnv allow
+                  else
+                    echo "direnv not found. It's optional but if you don't want to run `nix develop` manually every time, we recommend installing nix-direnv."
+                  fi
+                '';
+              }
+              {
+                name = "dev:help";
+                category = "Dev";
+                help = "Show purs-nix help";
+                command = ''
+                  purs-nix
                 '';
               }
               {
@@ -106,19 +123,29 @@
                 '';
               }
               {
-                name = "dev:build";
+                name = "dev:watch";
                 category = "Dev";
-                help = "Run project";
+                help = "Watch project";
                 command = ''
-                  nix build
+                  find src | entr -s 'echo bundling; purs-nix bundle'
                 '';
               }
               {
-                name = "dev:run-result";
+                name = "dev:bundle";
                 category = "Dev";
-                help = "Run build result";
+                help = "Bundle project and output to dist folder";
                 command = ''
-                  node result
+                  purs-nix bundle
+                  echo "run 'node dist/main.js' to execute bundle"
+                '';
+              }
+              {
+                name = "dev:build";
+                category = "Dev";
+                help = "Build project derivation and create result symlink";
+                command = ''
+                  nix build
+                  echo "run 'node result' to execute build result"
                 '';
               }
             ];

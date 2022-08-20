@@ -45,8 +45,13 @@
                 category = "Dev";
                 help = "Init project";
                 command = ''
-                  direnv allow
-                  npm install
+                  if [ -x "$(command -v direnv)" ]; then
+                    direnv allow
+                  else
+                    echo "direnv not found. It's optional but if you don't want to run `nix develop` manually every time, we recommend installing nix-direnv."
+                  fi
+
+                  dev:install
                 '';
               }
               {
