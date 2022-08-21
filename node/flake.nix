@@ -26,7 +26,7 @@
                 with pkgs;
                 [
                   nodejs-16_x
-                  bun
+                  bun # for dev:run
                 ];
 
               startup.shell-hook.text = ''
@@ -63,6 +63,7 @@
                 '';
               }
               {
+                # we use bun here
                 name = "dev:run";
                 category = "Dev";
                 help = "npm run dev";
