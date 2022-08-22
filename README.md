@@ -37,3 +37,14 @@ A PureScript template.
 ```sh
 nix flake new project-name -t 'github:tars0x9752/templates#purescript'
 ```
+
+### NixOS official templates
+
+
+```sh
+# Usage
+nix flake new project-name -t 'github:tars0x9752/templates#_OFFICIAL-TEMPLATE-NAME-HERE'
+
+# For "haskell-hello"
+nix flake new project-name -t 'github:tars0x9752/templates#_haskell-hello'
+```
