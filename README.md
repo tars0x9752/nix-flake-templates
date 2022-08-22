@@ -1,10 +1,14 @@
 # Templates
 
-Nix Flake Templates
+A flake of template flakes. (WIP)
 
-## List
+## Show templates list
 
-`nix flake show 'github:tars0x9752/templates'`
+```sh
+nix flake show 'github:tars0x9752/templates'
+```
+
+**Note:** We extends official NixOS's templates and their names are prefixed with `_`.
 
 ## Usage
 
@@ -15,12 +19,21 @@ nix flake init -t 'github:tars0x9752/templates#<TEMPLATE-NAME-HERE>'
 
 nix flake new <dirName> -t 'github:tars0x9752/templates#<TEMPLATE-NAME-HERE>'
 ```
-### Examples
+## My templates
+
+
+### node
+
+A NodeJS template with TypeScript.
 
 ```sh
-# example 1
-nix flake init -t 'github:tars0x9752/templates#trivial'
+nix flake new project-name -t 'github:tars0x9752/templates#node'
+```
 
-# example 2
-nix flake new node-project -t 'github:tars0x9752/templates#node'
+### purescript
+
+A PureScript template.
+
+```sh
+nix flake new project-name -t 'github:tars0x9752/templates#purescript'
 ```
