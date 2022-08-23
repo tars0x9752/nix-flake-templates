@@ -14,6 +14,11 @@
         officials = listToAttrs prefixed-list;
       in
       {
+        simple = {
+          path = ./simple;
+          description = "A simple project template";
+        };
+
         node = {
           path = ./node;
           description = "A nodejs project template";
