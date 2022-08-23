@@ -19,8 +19,15 @@ nix flake init -t 'github:tars0x9752/templates#<TEMPLATE-NAME-HERE>'
 
 nix flake new <dirName> -t 'github:tars0x9752/templates#<TEMPLATE-NAME-HERE>'
 ```
-## My templates
+## Templates
 
+### simple
+
+A simple template.
+
+```sh
+nix flake new project-name -t 'github:tars0x9752/templates#simple'
+```
 
 ### node
 
