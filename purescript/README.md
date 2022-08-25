@@ -1,7 +1,1 @@
-# purescript template
-
-## Usage
-
-```
-purs-nix run
-```
+# a purescript template
