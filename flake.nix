@@ -28,7 +28,11 @@
           path = ./purescript;
           description = "A purescript project template";
         };
-      } // officials; # exntends official templates (their names are prefixed with "_")
 
+        haskell = {
+          path = ./haskell;
+          description = "A haskell project template";
+        };
+      } // officials; # exntends official templates (their names are prefixed with "_")
   };
 }
