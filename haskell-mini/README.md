@@ -13,4 +13,8 @@ cabal repl
 
 # run
 cabal run
+
+# ghcid
+# basically you'd like to run this in a sub terminal | sub window.
+ghcid
 ```
