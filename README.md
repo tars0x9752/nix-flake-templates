@@ -55,7 +55,7 @@ nix flake new project-name -t 'github:tars0x9752/templates#haskell-mini'
 
 ### haskell-srid (srid/haskell-template)
 
-A full haskell template. (Just a ref to `github:srid/haskell-template`)
+A full haskell template. (Just a ref to [`github:srid/haskell-template`](https://github.com/srid/haskell-template))
 
 ```sh
 nix flake new project-name -t 'github:tars0x9752/templates#haskell-srid'
