@@ -1,3 +1,5 @@
+module Main where
+
 fzbz :: Int -> String
 fzbz num = case (num `mod` 3, num `mod` 5) of
   (0, 0) -> "FizzBuzz"
@@ -5,5 +7,6 @@ fzbz num = case (num `mod` 3, num `mod` 5) of
   (_, 0) -> "Buzz"
   (_, _) -> show num
 
+main :: IO ()
 main = do
-  mapM_ putStrLn $ map fzbz [1 .. 20]
+  mapM_ (putStrLn . fzbz) [1 .. 20]

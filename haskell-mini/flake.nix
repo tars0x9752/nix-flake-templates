@@ -16,7 +16,7 @@
 
         haskellPackages = pkgs.haskellPackages;
 
-        packageName = "a-haskell-template";
+        packageName = "haskell-mini"; # You must change "haskell-mini.cabal" file as well.
       in
       {
         packages.${packageName} =
