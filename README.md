@@ -45,12 +45,20 @@ A PureScript template.
 nix flake new project-name -t 'github:tars0x9752/templates#purescript'
 ```
 
-### haskell
+### haskell-mini
 
-A haskell template.
+A mini haskell template.
 
 ```sh
-nix flake new project-name -t 'github:tars0x9752/templates#haskell'
+nix flake new project-name -t 'github:tars0x9752/templates#haskell-mini'
+```
+
+### haskell-srid (srid/haskell-template)
+
+A full haskell template. (Just a ref to `github:srid/haskell-template`)
+
+```sh
+nix flake new project-name -t 'github:tars0x9752/templates#haskell-srid'
 ```
 
 ### NixOS official templates

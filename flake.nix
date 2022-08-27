@@ -38,9 +38,9 @@
         };
 
         # https://github.com/srid/haskell-template
-        haskell-full = {
+        haskell-srid = {
           path = haskell-slid.outPath;
-          description = "A full haskell template (refer to github:srid/haskell-template)";
+          description = "A full haskell template (Just a ref to github:srid/haskell-template)";
         };
       } // officials; # exntends official templates (their names are prefixed with "_")
   };
