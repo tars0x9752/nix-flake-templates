@@ -1,5 +1,5 @@
 {
-  description = "A haskell template";
+  description = "A mini haskell template";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
