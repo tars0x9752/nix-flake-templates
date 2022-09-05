@@ -47,7 +47,7 @@
 
         # https://github.com/srid/emanote-template
         emanote-srid = {
-          path = haskell-slid.outPath;
+          path = emanote-slid.outPath;
           description = "An emanote official template";
         };
       } // officials; # exntends official templates (their names are prefixed with "_")
