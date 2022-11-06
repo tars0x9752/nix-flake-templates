@@ -26,7 +26,6 @@
                 with pkgs;
                 [
                   nodejs-16_x
-                  bun # for dev:run
                 ];
 
               startup.shell-hook.text = ''
@@ -54,15 +53,6 @@
                 help = "Install npm deps";
                 command = ''
                   npm install
-                '';
-              }
-              {
-                # we use bun here
-                name = "dev:run";
-                category = "Dev";
-                help = "npm run dev";
-                command = ''
-                  npm run dev
                 '';
               }
               {
